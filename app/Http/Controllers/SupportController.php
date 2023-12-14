@@ -54,6 +54,7 @@ class SupportController extends Controller{
     public function destroy(string|int $id){
         $this->service->delete($id);
         return redirect()->route('supports.index');
+        
     }
 
 
