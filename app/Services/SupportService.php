@@ -2,15 +2,16 @@
 
 namespace App\Services;
 
+use App\DTO\CreateSupportDTO;
+use App\DTO\UpdateSupportDTO;
+use App\Repositories\SupportRepositoryInterface;
 use stdClass;
 
 class SupportService{
 
-    protected $repository;
-
-    public function __construct(){
-
-    }
+    public function __construct(
+        protected SupportRepositoryInterface $repository
+    ){}
 
     public function getAll(string $filter=null):array{
         return $this->repository->getAll($filter);
@@ -23,12 +24,12 @@ class SupportService{
         $this->repository->delete($id);
     }
 
-    public function new(string $subsject,string $status,string $body):stdClass{
-        return $this->repository->new($subsject, $status, $body);
+    public function new(CreateSupportDTO $supportDto):stdClass{
+        return $this->repository->new($supportDto);
     }
 
-    public function update(string $id,string $subsject,string $status,string $body):stdClass|null{
-        return $this->repository->update($id,$subsject, $status, $body);
+    public function update(UpdateSupportDTO $dto):stdClass|null{
+        return $this->repository->update($dto);
     }
 
 
