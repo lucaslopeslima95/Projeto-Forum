@@ -16,6 +16,17 @@ class SupportService{
     public function getAll(string $filter=null):array{
         return $this->repository->getAll($filter);
     }
+    public function paginate(
+        int $page = 1,
+        int $totalPerpage = 15,
+         string $filter=null
+    ){
+        return $this->repository->paginate(
+            page:$page,
+            totalPerpage:$totalPerpage,
+            filter:$filter
+            );
+    }
     public function findOne(string $id):stdClass|null{
         return $this->repository->findOne($id);
     }

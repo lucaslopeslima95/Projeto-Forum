@@ -10,8 +10,24 @@ class SupportEloquentORM implements SupportRepositoryInterface{
 
     public function __construct(protected Support $model){}
 
+    public function paginate(int $page = 1,int $totalPerpage = 15, string $filter=null):PaginationInterface{
+          $resultado = $this->model
+                            ->where(
+                                function($query) use($filter){
+                                    if($filter){
+                                        $query->where('subject',$filter);
+                                        $query->orWhere('body','like',"%$filter%");
+
+                                    }
+                                }
+                            )
+                            ->paginate($totalPerpage,['*'],'page',$page);
+            dd($resultado);
+
+    }
+
     public function getAll(string $filter=null):array{
-        
+
         return $this->model
         ->where(
             function($query) use($filter){
@@ -30,7 +46,7 @@ class SupportEloquentORM implements SupportRepositoryInterface{
         if(!$support){
             return null;
         }
-        return (object) $support->toArray();
+        return (object) $support;
     }
     public function delete(string $id):void{
         $this->model->findOrFail($id)->delete();

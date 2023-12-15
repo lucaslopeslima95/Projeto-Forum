@@ -7,7 +7,8 @@ use App\DTO\UpdateSupportDTO;
 use App\Models\Support;
 use App\Http\Requests\StoreUpdateSupportRequest;
 use App\Services\SupportService;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
+
 
 class SupportController extends Controller{
 
@@ -15,7 +16,12 @@ class SupportController extends Controller{
 
 
     public function index(Request $request){
-        $supports = $this->service->getAll();
+        $supports = $this->service->paginate(
+            page:$request->get('page',1),
+            totalPerpage:$request->get('per_page',15),
+            filter:$request->filter
+        );
+        dd($supports);
         return view('admin/supports/index',compact('supports'));
     }
 

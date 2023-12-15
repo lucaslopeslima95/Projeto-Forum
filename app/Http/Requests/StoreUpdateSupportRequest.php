@@ -12,7 +12,7 @@ class StoreUpdateSupportRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,7 +28,7 @@ class StoreUpdateSupportRequest extends FormRequest
         ];
         if ($this->method()==='PUT'){
             $rules['subject']=[
-                'require',
+                'required',
                 'min:3',
                 'max:255',
                 Rule::unique('supports')->ignore($this->id)
