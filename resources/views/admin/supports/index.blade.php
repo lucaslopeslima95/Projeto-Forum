@@ -10,7 +10,7 @@
         @foreach($supports->items() as $support)
             <tr>
                 <td>{{ $support->body   }}</td>
-                <td>{{ $support->status }}</td>
+                <td>{{ getStatusSupport($support->status) }}</td>
                 <td>{{ $support->subject}}</td>
                 <td>
                     <a href="{{ route('supports.show',$support->id) }}">Ir</a>
