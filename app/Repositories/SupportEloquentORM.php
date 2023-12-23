@@ -10,19 +10,19 @@ class SupportEloquentORM implements SupportRepositoryInterface{
 
     public function __construct(protected Support $model){}
 
-    public function paginate(int $page = 1,int $totalPerpage = 15, string $filter=null):PaginationInterface{
+    public function paginate(int $page = 1,int $totalPerpage = 15, string $filter=null):PaginationPresenter{
           $resultado = $this->model
                             ->where(
                                 function($query) use($filter){
                                     if($filter){
                                         $query->where('subject',$filter);
                                         $query->orWhere('body','like',"%$filter%");
-
                                     }
                                 }
                             )
                             ->paginate($totalPerpage,['*'],'page',$page);
-            dd($resultado);
+
+        return new PaginationPresenter($resultado);
 
     }
 

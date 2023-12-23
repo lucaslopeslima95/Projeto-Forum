@@ -21,7 +21,7 @@ class SupportController extends Controller{
             totalPerpage:$request->get('per_page',15),
             filter:$request->filter
         );
-        dd($supports);
+
         return view('admin/supports/index',compact('supports'));
     }
 
