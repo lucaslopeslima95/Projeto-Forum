@@ -1,19 +1,10 @@
-# Curso GRATUITO de Laravel 10.x
-
-- :movie_camera: [Acesse o Curso](https://academy.especializati.com.br/curso/laravel-10-gratuito).
-
-
-Links Úteis:
-
-- :tada: [Saiba Mais](https://linktr.ee/especializati)
-
 ## Passo a passo para rodar o projeto
 Clone o projeto
 ```sh
-git clone https://github.com/especializati/curso-de-laravel-10.git laravel-10
+git clone https://github.com/lucaslopeslima95/Projeto-Forum.git
 ```
 ```sh
-cd laravel-10/
+cd Projeto-Forum/
 ```
 
 
@@ -25,7 +16,7 @@ cp .env.example .env
 
 Atualize essas variáveis de ambiente no arquivo .env
 ```dosini
-APP_NAME="Especializa Ti"
+APP_NAME="Projeto Forum"
 APP_URL=http://localhost:8989
 
 DB_CONNECTION=mysql
