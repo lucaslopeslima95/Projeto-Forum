@@ -1,29 +1,16 @@
-@extends('admin.supports/layouts/app')
-@section('title','Forum')
+@extends('admin.layouts.app')
+
+@section('title', 'Fórum')
+
 @section('header')
-@include('admin.supports/partial/header')
+@include('admin.supports.partials.header', compact('supports'))
 @endsection
+
 @section('content')
-<a href="{{ route('supports.create')}}">Criar Duvida</a>
-<table>
-    <thead>
-        <th>Assunto</th>
-        <th>Status</th>
-        <th>Descrição</th>
-    </thead>
-    <tbody>
-        @foreach($supports->items() as $support)
-            <tr>
-                <td>{{ $support->body   }}</td>
-                <td>{{ getStatusSupport($support->status) }}</td>
-                <td>{{ $support->subject}}</td>
-                <td>
-                    <a href="{{ route('supports.show',$support->id) }}">Ir</a>
-                    <a href="{{ route('supports.edit',$support->id) }}">Editar</a>
-                </td>
-            </tr>
-        @endforeach
-    </tbody>
-</table>
-<x-pagination :paginator="$supports" :appends="$filters"/>
+@include('admin.supports.partials.content')
+
+<x-pagination
+    :paginator="$supports"
+    :appends="$filters" />
+
 @endsection

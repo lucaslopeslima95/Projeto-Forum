@@ -2,46 +2,59 @@
 
 namespace App\Services;
 
-use App\DTO\CreateSupportDTO;
-use App\DTO\UpdateSupportDTO;
-use App\Repositories\SupportRepositoryInterface;
+use App\DTO\Supports\CreateSupportDTO;
+use App\DTO\Supports\UpdateSupportDTO;
+use App\Enums\SupportStatus;
+use App\Repositories\Contracts\PaginationInterface;
+use App\Repositories\Contracts\SupportRepositoryInterface;
 use stdClass;
 
-class SupportService{
-
+class SupportService
+{
     public function __construct(
-        protected SupportRepositoryInterface $repository
-    ){}
-
-    public function getAll(string $filter=null):array{
-        return $this->repository->getAll($filter);
+        protected SupportRepositoryInterface $repository,
+    ) {
     }
+
     public function paginate(
         int $page = 1,
-        int $totalPerpage = 15,
-         string $filter=null
-    ){
+        int $totalPerPage = 15,
+        string $filter = null
+    ): PaginationInterface {
         return $this->repository->paginate(
-            page:$page,
-            totalPerpage:$totalPerpage,
-            filter:$filter
-            );
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter,
+        );
     }
-    public function findOne(string $id):stdClass|null{
+
+    public function getAll(string $filter = null): array
+    {
+        return $this->repository->getAll($filter);
+    }
+
+    public function findOne(string $id): stdClass|null
+    {
         return $this->repository->findOne($id);
     }
 
-    public function delete($id):void{
-        $this->repository->delete($id);
+    public function new(CreateSupportDTO $dto): stdClass
+    {
+        return $this->repository->new($dto);
     }
 
-    public function new(CreateSupportDTO $supportDto):stdClass{
-        return $this->repository->new($supportDto);
-    }
-
-    public function update(UpdateSupportDTO $dto):stdClass|null{
+    public function update(UpdateSupportDTO $dto): stdClass|null
+    {
         return $this->repository->update($dto);
     }
 
+    public function delete(string $id): void
+    {
+        $this->repository->delete($id);
+    }
 
+    public function updateStatus(string $id, SupportStatus $status): void
+    {
+        $this->repository->updateStatus($id, $status);
+    }
 }

@@ -12,5 +12,8 @@ class DefaultResource extends JsonResource
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request){return collect($this->resource);}
+    public function toArray(Request $request)
+    {
+        return collect($this->resource);
+    }
 }

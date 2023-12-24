@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Repositories\PaginationInterface;
+use App\Repositories\Contracts\PaginationInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 use stdClass;
 
@@ -25,6 +25,7 @@ class PaginationPresenter implements PaginationInterface
     public function items(): array
     {
         return $this->items;
+        // return $this->paginator->items();
     }
 
     public function total(): int
